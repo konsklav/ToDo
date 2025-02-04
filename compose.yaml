@@ -1,0 +1,23 @@
+﻿services:
+  api:
+    image: todoapp.api
+    build:
+      context: .
+      dockerfile: ToDoApp.Api/Dockerfile
+    ports:
+      - "9874:8080"
+      - "9875:8081"
+    environment:
+      TODO_ConnectionStrings__Database: "Host=host.docker.internal, Port=9876; Database=ToDoApp; User Id=postgres; Password=abc123!"
+  
+  database:
+    image: postgres
+    ports:
+      - "9876:5432"
+    environment:
+      POSTGRES_PASSWORD: "abc123!"
+    volumes:
+      - postgres-todo-data:/var/lib/postgresql/data
+        
+volumes:
+  postgres-todo-data:
