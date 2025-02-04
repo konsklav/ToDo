@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDo.Api.Requests;
+using ToDo.Api.Requests.Auth;
 
 namespace ToDo.Api.Controllers;
 

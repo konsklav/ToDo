@@ -1,4 +1,4 @@
-namespace ToDo.Api.Requests;
+namespace ToDo.Api.Requests.Auth;
 
 public class LoginRequest
 {
