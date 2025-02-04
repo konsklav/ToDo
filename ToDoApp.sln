@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.Api", "ToDo.Api/ToDo.Api.csproj", "{0C9AE43B-F850-49AE-8A10-F5B1E94D035E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Api", "ToDoApp.Api\ToDoApp.Api.csproj", "{0C9AE43B-F850-49AE-8A10-F5B1E94D035E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDo.Tests", "ToDo.Tests\ToDo.Tests.csproj", "{A151CE0E-3377-4840-9285-926B37EA082B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoApp.Tests", "ToDoApp.Tests\ToDoApp.Tests.csproj", "{A151CE0E-3377-4840-9285-926B37EA082B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

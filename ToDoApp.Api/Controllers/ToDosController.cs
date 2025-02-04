@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Api.Requests.ToDo;
+using ToDoApp.Api.Requests.ToDo;
 
-namespace ToDo.Api.Controllers;
+namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

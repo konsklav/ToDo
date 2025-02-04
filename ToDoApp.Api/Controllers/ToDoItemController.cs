@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using ToDo.Api.Requests.ToDoItem;
+using ToDoApp.Api.Requests.ToDoItem;
 
-namespace ToDo.Api.Controllers;
+namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("todos/{toDoId:int}/items")]
