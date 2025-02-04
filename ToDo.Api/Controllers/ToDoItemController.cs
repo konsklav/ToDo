@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ToDo.Api.Requests.ToDoItem;
 
 namespace ToDo.Api.Controllers;
 
@@ -13,13 +14,13 @@ public class ToDoItemController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IResult> Create(int toDoId)
+    public async Task<IResult> Create(int toDoId, [FromBody] CreateToDoItemRequest request)
     {
         throw new NotImplementedException();
     }
 
     [HttpPut("{itemId:int}")]
-    public async Task<IResult> Update(int itemId, int toDoId)
+    public async Task<IResult> Update(int itemId, int toDoId, [FromBody] UpdateToDoItemRequest request)
     {
         throw new NotImplementedException();
     }

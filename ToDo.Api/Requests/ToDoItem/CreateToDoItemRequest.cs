@@ -2,5 +2,4 @@
 
 public sealed record CreateToDoItemRequest(
     string Name,
-    bool IsDone,
-    int ToDoId);
+    bool IsDone);
