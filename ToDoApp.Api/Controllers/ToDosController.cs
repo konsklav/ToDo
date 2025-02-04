@@ -5,7 +5,7 @@ namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ToDosController : ControllerBase
+public class ToDosController(ToDoContext context) : ControllerBase
 {
     [HttpGet]
     public async Task<IResult> Get()

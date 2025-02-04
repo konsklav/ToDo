@@ -5,7 +5,7 @@ namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SignUpController : ControllerBase
+public class SignUpController(ToDoContext context) : ControllerBase
 {
     [HttpPost(Name = "Sign Up")]
     public async Task<IResult> Signup(SignUpRequest request)

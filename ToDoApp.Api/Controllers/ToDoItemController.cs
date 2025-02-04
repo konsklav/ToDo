@@ -5,7 +5,7 @@ namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("todos/{toDoId:int}/items")]
-public class ToDoItemController : ControllerBase
+public class ToDoItemController(ToDoContext context) : ControllerBase
 {
     [HttpGet("{itemId:int}")]
     public async Task<IResult> Get(int itemId, int toDoId)
