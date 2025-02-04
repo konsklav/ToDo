@@ -8,6 +8,14 @@ public class ToDoItemConfiguration : IEntityTypeConfiguration<ToDoItem>
 {
     public void Configure(EntityTypeBuilder<ToDoItem> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(i => i.Id);
+        builder.Property(i => i.Id).ValueGeneratedOnAdd();
+
+        builder.Property(i => i.Content)
+            .HasColumnType("varchar(200)");
+
+        // Is this necessary? @nove
+        builder.Property(i => i.IsDone)
+            .IsRequired();
     }
 }

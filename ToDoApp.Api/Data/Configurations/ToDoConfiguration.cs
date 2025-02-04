@@ -8,6 +8,18 @@ public class ToDoConfiguration : IEntityTypeConfiguration<ToDo>
 {
     public void Configure(EntityTypeBuilder<ToDo> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(t => t.Id);
+        builder.Property(t => t.Id).ValueGeneratedOnAdd();
+
+        builder
+            .HasMany(t => t.ToDoItems)
+            .WithOne();
+
+        builder
+            .HasOne(t => t.CreatedBy)
+            .WithMany();
+
+        builder.Property(t => t.Title)
+            .HasColumnType("varchar(50)");
     }
 }

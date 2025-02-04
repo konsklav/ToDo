@@ -8,6 +8,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        throw new NotImplementedException();
+        builder.HasKey(c => c.Id);
+        builder.Property(c => c.Id).ValueGeneratedOnAdd();
+
+        builder.Property(u => u.Username)
+            .HasColumnType($"varchar({User.MaxUsernameLength})");
+        builder.Property(u => u.Password)
+            .HasColumnType($"varchar({User.MaxPasswordLength})");
     }
 }
