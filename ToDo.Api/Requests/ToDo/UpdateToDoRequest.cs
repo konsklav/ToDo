@@ -1,6 +1,3 @@
 ﻿namespace ToDo.Api.Requests.ToDo;
 
-public class UpdateToDoRequest
-{
-    
-}
+public class UpdateToDoRequest(string Title);
