@@ -1,6 +1,3 @@
 namespace ToDoApp.Api.Requests.Auth;
 
-public class LoginRequest
-{
-    
-}
+public sealed record LoginRequest(string Username, string Password);
