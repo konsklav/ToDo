@@ -17,4 +17,9 @@ public class ToDo
         CreatedBy = createdBy;
         ToDoItems = toDoItems;
     }
+
+    public void Update(string title)
+    {
+        this.Title = title;
+    }
 }
