@@ -10,6 +10,10 @@ namespace ToDoApp.Api.Controllers;
 [Route("[controller]")]
 public class ToDosController(ToDoContext context) : ControllerBase
 {
+    /// <summary>
+    /// Gets all the To-Dos associated with the user.
+    /// </summary>
+    /// <param name="toDoQueries"></param>
     [HttpGet]
     public async Task<IResult> Get([FromServices] ToDoQueries toDoQueries)
     {
@@ -19,6 +23,11 @@ public class ToDosController(ToDoContext context) : ControllerBase
         return Results.Ok(toDosList);
     }
 
+    /// <summary>
+    /// Creates a new To-Do.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <exception cref="DbUpdateException"></exception>
     [HttpPost]
     public async Task<IResult> Create([FromBody] CreateToDoRequest request)
     {
@@ -44,6 +53,11 @@ public class ToDosController(ToDoContext context) : ControllerBase
         return Results.Ok(toDo);
     }
 
+    /// <summary>
+    /// Gets a To-Do based on the given id.
+    /// </summary>
+    /// <param name="toDoId"></param>
+    /// <param name="toDoQueries"></param>
     [HttpGet("{toDoId:int}")]
     public async Task<IResult> Get(
         int toDoId,
@@ -55,6 +69,13 @@ public class ToDosController(ToDoContext context) : ControllerBase
         return Results.Ok(toDo);
     }
 
+    /// <summary>
+    /// Updates the To-Do specified by the id.
+    /// </summary>
+    /// <param name="toDoId"></param>
+    /// <param name="request"></param>
+    /// <param name="toDoQueries"></param>
+    /// <exception cref="DbUpdateException"></exception>
     [HttpPut("{toDoId:int}")]
     public async Task<IResult> Update(int toDoId,
         [FromBody] UpdateToDoRequest request,
@@ -81,6 +102,12 @@ public class ToDosController(ToDoContext context) : ControllerBase
         return Results.Ok(toDo);
     }
 
+    /// <summary>
+    /// Deletes the specified, by its id, To-Do.
+    /// </summary>
+    /// <param name="toDoId"></param>
+    /// <param name="toDoQueries"></param>
+    /// <exception cref="DbUpdateException"></exception>
     [HttpDelete("{toDoId:int}")]
     public async Task<IResult> Delete(
         int toDoId,

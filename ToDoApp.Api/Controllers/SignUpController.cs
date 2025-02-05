@@ -9,6 +9,11 @@ namespace ToDoApp.Api.Controllers;
 [Route("[controller]")]
 public class SignUpController(ToDoContext context) : ControllerBase
 {
+    /// <summary>
+    /// Creates a new user.
+    /// </summary>
+    /// <param name="request"></param>
+    /// <exception cref="DbUpdateException"></exception>
     [HttpPost(Name = "Sign Up")]
     public async Task<IResult> Signup(SignUpRequest request)
     {

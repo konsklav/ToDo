@@ -8,6 +8,10 @@ namespace ToDoApp.Api.Controllers;
 [Route("[controller]")]
 public class AuthController(ToDoContext context) : ControllerBase
 {
+    /// <summary>
+    /// Checks the db for a user with the specified credentials.
+    /// </summary>
+    /// <param name="request"></param>
     [HttpPost("login")]
     public async Task<IResult> Login(LoginRequest request)
     {
