@@ -29,7 +29,9 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// <param name="request"></param>
     /// <exception cref="DbUpdateException"></exception>
     [HttpPost]
-    public async Task<IResult> Create([FromBody] CreateToDoRequest request)
+    public async Task<IResult> Create(
+        [FromBody] CreateToDoRequest request,
+        [FromServices] ToDoRepository toDoRepository)
     {
         var user = new User("test", "test"); // temp --> needs session management
         var title = request.Title;
@@ -41,14 +43,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
 
         await context.ToDos.AddAsync(toDo);
 
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
 
         return Results.Ok(toDo);
     }
@@ -90,14 +85,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
         
         toDo.Update(title);
         
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
 
         return Results.Ok(toDo);
     }
@@ -120,14 +108,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
         
         context.ToDos.Remove(toDo);
         
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
         
         return Results.Ok($"Successfully deleted ToDo with Id: {toDo.Id}!");
     }

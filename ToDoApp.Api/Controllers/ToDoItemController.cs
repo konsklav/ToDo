@@ -56,14 +56,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         
         toDo.ToDoItems.Add(toDoItem);
 
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
 
         return Results.Ok(toDoItem);
     }
@@ -94,14 +87,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         
         toDoItem.Update(request.Content, request.IsDone);
         
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
 
         return Results.Ok(toDoItem);
     }
@@ -130,14 +116,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
 
         toDo.ToDoItems.Remove(toDoItem);
         
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch
-        {
-            throw new DbUpdateException();
-        }
+        await toDoRepository.SaveChangesAsync();
 
         return Results.Ok(toDoItem);
     }

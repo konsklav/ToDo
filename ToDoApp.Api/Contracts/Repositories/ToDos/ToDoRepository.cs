@@ -26,4 +26,16 @@ public class ToDoRepository(ToDoContext context)
 
         return toDo;
     }
+    
+    public async Task SaveChangesAsync()
+    {
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch
+        {
+            throw new DbUpdateException();
+        }
+    }
 }
