@@ -9,7 +9,7 @@ public class ToDoItem
     // Required for EFCore
     private ToDoItem() { }
 
-    public ToDoItem(string content, bool isDone, int id = 0)
+    public ToDoItem(string content, bool isDone = false, int id = 0)
     {
         Id = id;
         Content = content;
