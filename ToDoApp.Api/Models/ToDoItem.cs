@@ -15,4 +15,10 @@ public class ToDoItem
         Content = content;
         IsDone = isDone;
     }
+
+    public void Update(string content, bool isDone)
+    {
+        Content = content;
+        IsDone = isDone;
+    }
 }
