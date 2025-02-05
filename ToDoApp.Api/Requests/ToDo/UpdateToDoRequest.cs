@@ -1,3 +1,3 @@
 ﻿namespace ToDoApp.Api.Requests.ToDo;
 
-public class UpdateToDoRequest(string Title);
+public sealed record UpdateToDoRequest(string Title);
