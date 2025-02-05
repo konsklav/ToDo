@@ -3,7 +3,7 @@ using ToDoApp.Api.Models;
 
 namespace ToDoApp.Api.UseCases.ToDos;
 
-public class ToDoQueries(ToDoContext context)
+public class ToDoRepository(ToDoContext context)
 {
     public async Task<List<ToDo>> GetAllAsync(int userId)
     {

@@ -15,15 +15,15 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     /// </summary>
     /// <param name="toDoId"></param>
     /// <param name="itemId"></param>
-    /// <param name="toDoQueries"></param>
+    /// <param name="toDoRepository"></param>
     [HttpGet("{itemId:int}")]
     public async Task<IResult> Get(
         int toDoId,
         int itemId,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> requires session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         
@@ -45,10 +45,10 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     public async Task<IResult> Create(
         int toDoId,
         [FromBody] CreateToDoItemRequest request,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> requires session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
 
@@ -80,10 +80,10 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         int itemId,
         int toDoId,
         [FromBody] UpdateToDoItemRequest request,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> requires session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         
@@ -116,10 +116,10 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     public async Task<IResult> Delete(
         int itemId,
         int toDoId,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> requires session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         

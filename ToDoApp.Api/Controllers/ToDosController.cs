@@ -13,12 +13,12 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// <summary>
     /// Gets all the To-Dos associated with the user.
     /// </summary>
-    /// <param name="toDoQueries"></param>
+    /// <param name="toDoRepository"></param>
     [HttpGet]
-    public async Task<IResult> Get([FromServices] ToDoQueries toDoQueries)
+    public async Task<IResult> Get([FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> needs session management
-        var toDosList = await toDoQueries.GetAllAsync(userId);
+        var toDosList = await toDoRepository.GetAllAsync(userId);
 
         return Results.Ok(toDosList);
     }
@@ -57,14 +57,14 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// Gets a To-Do based on the given id.
     /// </summary>
     /// <param name="toDoId"></param>
-    /// <param name="toDoQueries"></param>
+    /// <param name="toDoRepository"></param>
     [HttpGet("{toDoId:int}")]
     public async Task<IResult> Get(
         int toDoId,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> needs session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
 
         return Results.Ok(toDo);
     }
@@ -74,16 +74,16 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// </summary>
     /// <param name="toDoId"></param>
     /// <param name="request"></param>
-    /// <param name="toDoQueries"></param>
+    /// <param name="toDoRepository"></param>
     /// <exception cref="DbUpdateException"></exception>
     [HttpPut("{toDoId:int}")]
     public async Task<IResult> Update(int toDoId,
         [FromBody] UpdateToDoRequest request,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> needs session management
         var title = request.Title;
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         
         if (toDo == null)
             return Results.NotFound();
@@ -106,15 +106,15 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// Deletes the specified, by its id, To-Do.
     /// </summary>
     /// <param name="toDoId"></param>
-    /// <param name="toDoQueries"></param>
+    /// <param name="toDoRepository"></param>
     /// <exception cref="DbUpdateException"></exception>
     [HttpDelete("{toDoId:int}")]
     public async Task<IResult> Delete(
         int toDoId,
-        [FromServices] ToDoQueries toDoQueries)
+        [FromServices] ToDoRepository toDoRepository)
     {
         var userId = 1; // temp --> needs session management
-        var toDo = await toDoQueries.GetByIdAsync(toDoId, userId);
+        var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound();
         
