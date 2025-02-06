@@ -65,6 +65,8 @@ public class ToDosController(ToDoContext context) : ControllerBase
     {
         var userId = HttpContext.GetRequiredUserId();
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
+        if (toDo == null)
+            return Results.NotFound();
 
         return Results.Ok(toDo);
     }
