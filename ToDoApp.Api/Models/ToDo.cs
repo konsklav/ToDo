@@ -20,8 +20,23 @@ public class ToDo
         _toDoItems = toDoItems;
     }
 
+    public static ToDo Create(string title, User createdBy, List<ToDoItem> toDoItems)
+    {
+        return new ToDo(title, createdBy, toDoItems);
+    }
+    
     public void Update(string title)
     {
         Title = title;
+    }
+
+    public void AddItem(ToDoItem toDoItem)
+    {
+        _toDoItems.Add(toDoItem);
+    }
+
+    public void RemoveItem(ToDoItem toDoItem)
+    {
+        _toDoItems.Remove(toDoItem);
     }
 }
