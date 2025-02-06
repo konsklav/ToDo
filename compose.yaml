@@ -8,7 +8,7 @@
       - "9874:8080"
       - "9875:8081"
     environment:
-      TODO_ConnectionStrings__Database: "Host=host.docker.internal, Port=9876; Database=ToDoApp; User Id=postgres; Password=abc123!"
+      TODO_ConnectionStrings__Database: "Host=host.docker.internal; Port=9876; Database=ToDoApp; User Id=postgres; Password=abc123!"
   
   database:
     image: postgres
