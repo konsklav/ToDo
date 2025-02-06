@@ -2,7 +2,7 @@
 
 internal sealed class SessionManagementMiddleware : IMiddleware
 {
-    private readonly string[] _whitelist = ["/auth/login", "/signup"];
+    private readonly string[] _whitelist = ["/", "/auth/login", "/signup"];
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
