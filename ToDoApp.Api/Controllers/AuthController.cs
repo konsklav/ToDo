@@ -28,8 +28,11 @@ public class AuthController(ToDoContext context) : ControllerBase
         return Results.Ok(user);
     }
 
+    /// <summary>
+    /// Invalidates the session
+    /// </summary>
     [HttpGet("logout")]
-    public async Task<IResult> Logout()
+    public IResult Logout()
     {
         HttpContext.Session.Remove(TodoConstants.SessionUserId);
         return Results.Ok();
