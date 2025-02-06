@@ -8,7 +8,7 @@ public class ToDoRepository(ToDoContext context)
     public async Task<List<ToDo>> GetAllAsync(int userId)
     {
         var toDosList = await context.ToDos
-            .Include(t => t.ToDoItems)
+            .Include(t => t.Items)
             .Include(t => t.CreatedBy)
             .Where(t => t.CreatedBy.Id == userId)
             .ToListAsync();
@@ -19,7 +19,7 @@ public class ToDoRepository(ToDoContext context)
     public async Task<ToDo?> GetByIdAsync(int toDoId, int userId)
     {
         var toDo = await context.ToDos
-            .Include(t => t.ToDoItems)
+            .Include(t => t.Items)
             .Include(t => t.CreatedBy)
             .Where(t => t.CreatedBy.Id == userId)
             .FirstOrDefaultAsync(t => t.Id == toDoId);

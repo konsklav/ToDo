@@ -2,22 +2,22 @@ namespace ToDoApp.Api.Models;
 
 public class ToDo
 {
-    private readonly List<ToDoItem> _toDoItems;
+    private readonly List<ToDoItem> _items;
     
     public int Id { get; private set; }
     public string Title { get; private set; }
     public User CreatedBy { get; private set; }
-    public IReadOnlyList<ToDoItem> ToDoItems => _toDoItems;
+    public IReadOnlyList<ToDoItem> Items => _items;
     
     // Required for EFCore
     private ToDo() {}
 
-    private ToDo(string title, User createdBy, List<ToDoItem> toDoItems, int id = 0)
+    private ToDo(string title, User createdBy, List<ToDoItem> items, int id = 0)
     {
         Id = id;
         Title = title;
         CreatedBy = createdBy;
-        _toDoItems = toDoItems;
+        _items = items;
     }
 
     public static ToDo Create(string title, User createdBy, List<ToDoItem> toDoItems)
@@ -32,11 +32,13 @@ public class ToDo
 
     public void AddItem(ToDoItem toDoItem)
     {
-        _toDoItems.Add(toDoItem);
+        _items.Add(toDoItem);
     }
 
     public void RemoveItem(ToDoItem toDoItem)
     {
-        _toDoItems.Remove(toDoItem);
+        var item = _items.FirstOrDefault(item => item.Id == toDoItem.Id);
+        if (item != null)
+            _items.Remove(item);
     }
 }

@@ -27,7 +27,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         
-        var toDoItems = toDo.ToDoItems;
+        var toDoItems = toDo.Items;
         var toDoItem = toDoItems.FirstOrDefault(i => i.Id == itemId);
         if (toDoItem == null)
             return Results.NotFound($"Couldn't find a ToDoItem with Id: {itemId}");
@@ -81,7 +81,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         
-        var toDoItems = toDo.ToDoItems;
+        var toDoItems = toDo.Items;
         var toDoItem = toDoItems.FirstOrDefault(i => i.Id == itemId);
         if (toDoItem == null)
             return Results.NotFound($"Couldn't find a ToDoItem with Id: {itemId}");
@@ -109,7 +109,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
         
-        var toDoItems = toDo.ToDoItems;
+        var toDoItems = toDo.Items;
         var toDoItem = toDoItems.FirstOrDefault(i => i.Id == itemId);
         if (toDoItem == null)
             return Results.NotFound($"Couldn't find a ToDoItem with Id: {itemId}");

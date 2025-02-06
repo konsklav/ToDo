@@ -12,7 +12,7 @@ public class ToDoConfiguration : IEntityTypeConfiguration<ToDo>
         builder.Property(t => t.Id).ValueGeneratedOnAdd();
 
         builder
-            .HasMany(t => t.ToDoItems)
+            .HasMany(t => t.Items)
             .WithOne();
 
         builder
