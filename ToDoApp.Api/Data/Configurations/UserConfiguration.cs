@@ -15,5 +15,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .HasColumnType($"varchar({User.MaxUsernameLength})");
         builder.Property(u => u.Password)
             .HasColumnType($"varchar({User.MaxPasswordLength})");
+
+        builder.HasIndex(u => u.Username)
+            .IsUnique();
     }
 }
