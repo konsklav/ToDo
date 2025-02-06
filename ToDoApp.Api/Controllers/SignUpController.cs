@@ -15,7 +15,6 @@ public class SignUpController(ToDoContext context) : ControllerBase
     /// Creates a new user.
     /// </summary>
     /// <param name="request"></param>
-    /// <exception cref="DbUpdateException"></exception>
     [HttpPost(Name = "Sign Up")]
     public async Task<IResult> Signup(SignUpRequest request)
     {
@@ -30,9 +29,10 @@ public class SignUpController(ToDoContext context) : ControllerBase
         {
             await context.SaveChangesAsync();
         }
-        catch
+        catch (DbUpdateException ex)
         {
-            throw new DbUpdateException();
+            Results.InternalServerError("An error occured. Check the message below: \n\n " +
+                                        $"{ex.Message}");
         }
         
         return Results.Ok(user);
