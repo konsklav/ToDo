@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ToDoApp.Api.Contracts.Requests.ToDo;
+using ToDoApp.Api.Data.Repositories.ToDos;
 using ToDoApp.Api.Models;
-using ToDoApp.Api.Requests.ToDo;
-using ToDoApp.Api.UseCases.ToDos;
 
 namespace ToDoApp.Api.Controllers;
 

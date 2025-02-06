@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ToDoApp.Api.Contracts.Requests.Auth;
 using ToDoApp.Api.Models;
-using ToDoApp.Api.Requests.Auth;
 
 namespace ToDoApp.Api.Controllers;
 

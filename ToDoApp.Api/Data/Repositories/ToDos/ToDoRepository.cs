@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Api.Models;
 
-namespace ToDoApp.Api.UseCases.ToDos;
+namespace ToDoApp.Api.Data.Repositories.ToDos;
 
 public class ToDoRepository(ToDoContext context)
 {

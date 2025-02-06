@@ -1,4 +1,4 @@
-﻿namespace ToDoApp.Api.Requests.ToDoItem;
+﻿namespace ToDoApp.Api.Contracts.Requests.ToDoItem;
 
 public sealed record UpdateToDoItemRequest(
     string Content,

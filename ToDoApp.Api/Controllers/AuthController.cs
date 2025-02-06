@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ToDoApp.Api.Requests.Auth;
+using ToDoApp.Api.Contracts.Requests.Auth;
 
 namespace ToDoApp.Api.Controllers;
 
@@ -23,13 +23,15 @@ public class AuthController(ToDoContext context) : ControllerBase
         var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
         if(user is null)
             return Results.Unauthorized();
-
+        
+        HttpContext.Session.SetInt32(TodoConstants.SessionUserId, user.Id);
         return Results.Ok(user);
     }
 
     [HttpGet("logout")]
     public async Task<IResult> Logout()
     {
-        throw new NotImplementedException();
+        HttpContext.Session.Remove(TodoConstants.SessionUserId);
+        return Results.Ok();
     }
 }
