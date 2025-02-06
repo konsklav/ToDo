@@ -22,7 +22,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         int itemId,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> requires session management
+        var userId = HttpContext.GetRequiredUserId();
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
@@ -47,7 +47,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         [FromBody] CreateToDoItemRequest request,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> requires session management
+        var userId = HttpContext.GetRequiredUserId(); 
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
@@ -75,7 +75,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         [FromBody] UpdateToDoItemRequest request,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> requires session management
+        var userId = HttpContext.GetRequiredUserId(); 
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");
@@ -104,7 +104,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         int toDoId,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> requires session management
+        var userId = HttpContext.GetRequiredUserId();
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound($"Couldn't find a ToDo with Id: {toDoId}");

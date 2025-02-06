@@ -17,7 +17,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
     [HttpGet]
     public async Task<IResult> Get([FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> needs session management
+        var userId = HttpContext.GetRequiredUserId();
         var toDosList = await toDoRepository.GetAllAsync(userId);
 
         return Results.Ok(toDosList);
@@ -33,7 +33,8 @@ public class ToDosController(ToDoContext context) : ControllerBase
         [FromBody] CreateToDoRequest request,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var user = new User("test", "test"); // temp --> needs session management
+        var userId = HttpContext.GetRequiredUserId();
+        var user = new User("test", "test"); // add database call here
         var title = request.Title;
         var toDoItemsDto = request.Items;
 
@@ -58,7 +59,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
         int toDoId,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> needs session management
+        var userId = HttpContext.GetRequiredUserId();
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
 
         return Results.Ok(toDo);
@@ -76,7 +77,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
         [FromBody] UpdateToDoRequest request,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> needs session management
+        var userId = HttpContext.GetRequiredUserId(); 
         var title = request.Title;
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         
@@ -101,7 +102,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
         int toDoId,
         [FromServices] ToDoRepository toDoRepository)
     {
-        var userId = 1; // temp --> needs session management
+        var userId = HttpContext.GetRequiredUserId();
         var toDo = await toDoRepository.GetByIdAsync(toDoId, userId);
         if (toDo == null)
             return Results.NotFound();

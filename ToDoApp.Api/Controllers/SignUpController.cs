@@ -21,19 +21,13 @@ public class SignUpController(ToDoContext context) : ControllerBase
         var username = request.Username;
         var password = request.Password;
 
+        if (await context.Users.AnyAsync(u => u.Username == username))
+            return Results.Conflict($"Username '{username}' already exists!");
+
         var user = new User(username, password);
         
         await context.Users.AddAsync(user);
-        
-        try
-        {
-            await context.SaveChangesAsync();
-        }
-        catch (DbUpdateException ex)
-        {
-            Results.InternalServerError("An error occured. Check the message below: \n\n " +
-                                        $"{ex.Message}");
-        }
+        await context.SaveChangesAsync();
         
         return Results.Ok(user);
     }
