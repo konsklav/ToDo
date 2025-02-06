@@ -11,6 +11,17 @@ public class TodoTests
         new("Shower Gel", id: 2)];
     
     [Fact]
+    public void Create_ShouldCreateANewToDo()
+    {
+        // Act
+        var toDo = ToDo.Create("Test", _user, []);
+
+        // Assert
+        Assert.NotNull(toDo);
+        Assert.IsType<ToDo>(toDo);
+    }
+    
+    [Fact]
     public void Update_ShouldUpdateTitle()
     {
         // Arrange
@@ -22,6 +33,22 @@ public class TodoTests
 
         // Assert
         Assert.Equal(expected: newTitle, actual: todo.Title);
+    }
+    
+    [Fact]
+    public void AddItem_ShouldAddToDoItemInTheList()
+    {
+        // Arrange
+        var todo = ToDo.Create("Test", _user, _items);
+        var initialCount = todo.Items.Count;
+        var newItem = new ToDoItem("Bananas", id: 3);
+        
+        // Act
+        todo.AddItem(newItem);
+
+        // Assert
+        Assert.Equal(initialCount + 1, todo.Items.Count);
+        Assert.Contains(newItem, todo.Items);
     }
 
     [Fact]
