@@ -16,7 +16,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     /// <param name="toDoId"></param>
     /// <param name="itemId"></param>
     /// <param name="toDoRepository"></param>
-    [HttpGet("{itemId:int}")]
+    [HttpGet("{itemId:int}", Name = "Get ToDoItem")]
     public async Task<IResult> Get(
         int toDoId,
         int itemId,
@@ -40,7 +40,6 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     /// </summary>
     /// <param name="toDoId"></param>
     /// <param name="request"></param>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpPost]
     public async Task<IResult> Create(
         int toDoId,
@@ -54,11 +53,14 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
 
         var toDoItem = new ToDoItem(request.Content);
         
-        toDo.ToDoItems.Add(toDoItem);
+        toDo.AddItem(toDoItem);
 
         await toDoRepository.SaveChangesAsync();
 
-        return Results.Ok(toDoItem);
+        return Results.CreatedAtRoute(
+            routeName: "Get ToDoItem",
+            routeValues: new { toDoId = toDo.Id, itemId = toDoItem.Id },
+            value: toDoItem);
     }
 
     /// <summary>
@@ -67,7 +69,6 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     /// <param name="itemId"></param>
     /// <param name="toDoId"></param>
     /// <param name="request"></param>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpPut("{itemId:int}")]
     public async Task<IResult> Update(
         int itemId,
@@ -97,7 +98,6 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
     /// </summary>
     /// <param name="itemId"></param>
     /// <param name="toDoId"></param>
-    /// <exception cref="NotImplementedException"></exception>
     [HttpDelete("{itemId:int}")]
     public async Task<IResult> Delete(
         int itemId,
@@ -114,7 +114,7 @@ public class ToDoItemController(ToDoContext context) : ControllerBase
         if (toDoItem == null)
             return Results.NotFound($"Couldn't find a ToDoItem with Id: {itemId}");
 
-        toDo.ToDoItems.Remove(toDoItem);
+        toDo.RemoveItem(toDoItem);
         
         await toDoRepository.SaveChangesAsync();
 

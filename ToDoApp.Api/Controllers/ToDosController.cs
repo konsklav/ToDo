@@ -14,7 +14,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// Gets all the To-Dos associated with the user.
     /// </summary>
     /// <param name="toDoRepository"></param>
-    [HttpGet]
+    [HttpGet(Name = "Get ToDos")]
     public async Task<IResult> Get([FromServices] ToDoRepository toDoRepository)
     {
         var userId = HttpContext.GetRequiredUserId();
@@ -27,26 +27,30 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// Creates a new To-Do.
     /// </summary>
     /// <param name="request"></param>
-    /// <exception cref="DbUpdateException"></exception>
     [HttpPost]
     public async Task<IResult> Create(
         [FromBody] CreateToDoRequest request,
         [FromServices] ToDoRepository toDoRepository)
     {
         var userId = HttpContext.GetRequiredUserId();
-        var user = new User("test", "test"); // add database call here
+        var user = await context.Users.FindAsync(userId);
+        if (user == null)
+            return Results.NotFound();
         var title = request.Title;
         var toDoItemsDto = request.Items;
 
         var toDoItems = toDoItemsDto.Select(toDoItemDto => new ToDoItem(toDoItemDto.Content)).ToList();
 
-        var toDo = new ToDo(title, user, toDoItems);
+        var toDo = ToDo.Create(title, user, toDoItems);
 
         await context.ToDos.AddAsync(toDo);
 
         await toDoRepository.SaveChangesAsync();
 
-        return Results.Ok(toDo);
+        return Results.CreatedAtRoute(
+            routeName: "Get ToDo",
+            routeValues: new {toDoId = toDo.Id},
+            value: toDo);
     }
 
     /// <summary>
@@ -54,7 +58,7 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// </summary>
     /// <param name="toDoId"></param>
     /// <param name="toDoRepository"></param>
-    [HttpGet("{toDoId:int}")]
+    [HttpGet("{toDoId:int}", Name = "Get ToDo")]
     public async Task<IResult> Get(
         int toDoId,
         [FromServices] ToDoRepository toDoRepository)
@@ -71,7 +75,6 @@ public class ToDosController(ToDoContext context) : ControllerBase
     /// <param name="toDoId"></param>
     /// <param name="request"></param>
     /// <param name="toDoRepository"></param>
-    /// <exception cref="DbUpdateException"></exception>
     [HttpPut("{toDoId:int}")]
     public async Task<IResult> Update(int toDoId,
         [FromBody] UpdateToDoRequest request,
