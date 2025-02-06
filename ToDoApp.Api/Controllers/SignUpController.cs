@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Api.Models;
@@ -7,6 +8,7 @@ namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[AllowAnonymous]
 public class SignUpController(ToDoContext context) : ControllerBase
 {
     /// <summary>

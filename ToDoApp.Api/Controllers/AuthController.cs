@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.Api.Requests.Auth;
@@ -6,6 +7,7 @@ namespace ToDoApp.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[AllowAnonymous]
 public class AuthController(ToDoContext context) : ControllerBase
 {
     /// <summary>
